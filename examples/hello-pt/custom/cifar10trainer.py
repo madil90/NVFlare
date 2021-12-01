@@ -116,7 +116,7 @@ class Cifar10Trainer(Executor):
                 try:
                     dxo = from_shareable(shareable)
                 except:
-                    self.log_error(fl_ctx, "Unable to extract dxo from shareable.")
+                    self.log_exception(fl_ctx, "Unable to extract dxo from shareable.")
                     return make_reply(ReturnCode.BAD_TASK_DATA)
 
                 # Ensure data kind is weights.
@@ -151,6 +151,7 @@ class Cifar10Trainer(Executor):
                 dxo = model_learnable_to_dxo(ml)
                 return dxo.to_shareable()
             else:
+                self.log_error(fl_ctx, f"Unknown task name: {task_name}.")
                 return make_reply(ReturnCode.TASK_UNKNOWN)
         except:
             self.log_exception(fl_ctx, f"Exception in simple trainer.")

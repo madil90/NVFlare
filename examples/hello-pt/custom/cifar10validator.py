@@ -54,12 +54,12 @@ class Cifar10Validator(Executor):
                 try:
                     dxo = from_shareable(shareable)
                 except:
-                    self.log_error(fl_ctx, "Error in extracting dxo from shareable.")
+                    self.log_exception(fl_ctx, "Error in extracting dxo from shareable.")
                     return make_reply(ReturnCode.BAD_TASK_DATA)
 
                 # Ensure data_kind is weights.
                 if not dxo.data_kind == DataKind.WEIGHTS:
-                    self.log_exception(fl_ctx, f"DXO is of type {dxo.data_kind} but expected type WEIGHTS.")
+                    self.log_error(fl_ctx, f"DXO is of type {dxo.data_kind} but expected type WEIGHTS.")
                     return make_reply(ReturnCode.BAD_TASK_DATA)
 
                 # Extract weights and ensure they are tensor.
@@ -80,6 +80,7 @@ class Cifar10Validator(Executor):
                 self.log_exception(fl_ctx, f"Exception in validating model from {model_owner}")
                 return make_reply(ReturnCode.EXECUTION_EXCEPTION)
         else:
+            self.log_error(fl_ctx, f"Unknown task name: {task_name}.")
             return make_reply(ReturnCode.TASK_UNKNOWN)
 
     def do_validation(self, weights, abort_signal):

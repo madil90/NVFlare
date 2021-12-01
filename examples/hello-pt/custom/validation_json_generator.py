@@ -49,11 +49,9 @@ class ValidationJsonGenerator(FLComponent):
             val_results = fl_ctx.get_prop(AppConstants.VALIDATION_RESULT, None)
 
             if not model_owner:
-                self.log_error(fl_ctx, "model_owner unknown. Validation result will not be saved to json",
-                               fire_event=False)
+                self.log_error(fl_ctx, "model_owner unknown. Validation result will not be saved to json")
             if not data_client:
-                self.log_error(fl_ctx, "data_client unknown. Validation result will not be saved to json",
-                               fire_event=False)
+                self.log_error(fl_ctx, "data_client unknown. Validation result will not be saved to json")
 
             if val_results:
                 try:
@@ -65,12 +63,11 @@ class ValidationJsonGenerator(FLComponent):
                             self._val_results[data_client] = {}
                         self._val_results[data_client][model_owner] = dxo.data
                     else:
-                        self.log_error(fl_ctx, f"Expected dxo of kind METRICS but got {dxo.data_kind} instead.",
-                                       fire_event=False)
+                        self.log_error(fl_ctx, f"Expected dxo of kind METRICS but got {dxo.data_kind} instead.")
                 except:
-                    self.log_exception(fl_ctx, f"Exception in handling validation result.", fire_event=False)
+                    self.log_exception(fl_ctx, f"Exception in handling validation result.")
             else:
-                self.log_error(fl_ctx, "Validation result not found.", fire_event=False)
+                self.log_error(fl_ctx, "Validation result not found.")
         elif event_type == EventType.END_RUN:
             run_dir = fl_ctx.get_engine().get_workspace().get_run_dir(fl_ctx.get_run_number())
             cross_val_res_dir = os.path.join(run_dir, self._results_dir)

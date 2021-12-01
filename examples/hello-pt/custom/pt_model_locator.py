@@ -62,8 +62,8 @@ class PTModelLocator(ModelLocator):
                 # Create dxo and return
                 return model_learnable_to_dxo(ml)
             except:
-                self.log_error(fl_ctx, "Error in retrieving {model_name}.", fire_event=False)
+                self.log_exception(fl_ctx, "Error in retrieving {model_name}.")
                 return None
         else:
-            self.log_error(fl_ctx, f"PTModelLocator doesn't recognize name: {model_name}", fire_event=False)
+            self.log_error(fl_ctx, f"PTModelLocator doesn't recognize name: {model_name}")
             return None
