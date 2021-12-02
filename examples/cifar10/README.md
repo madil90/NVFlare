@@ -35,7 +35,7 @@ In the following experiments, we will be using 8 clients. Press y and enter when
 ### 2.2 (Optional) Secure FL workspace
 
 The project file for creating the secure workspace used in this example is shown at 
-[./workspaces/secure_project.yml](./workspaces/secure_project.yml).
+[./workspaces/secure_project.yml](../setup/workspaces/secure_project.yml).
 
 To create the secure workspace, please use the following to build a package and copy it 
 to `secure_workspace` for later experimentation.

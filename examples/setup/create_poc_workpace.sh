@@ -20,4 +20,8 @@ python3 -m nvflare.lighter.poc -n "${n_clients}" || exit
 mv "poc" ${workspace}
 echo "Created POC workspace at ./workspaces/${workspace}"
 
+# Copy examples to the admin folder
+mkdir -p ./workspaces/${workspace}/admin/transfer
+cp -rf * poc ./workspaces/${workspace}/admin/transfer
+
 cd "${cur_dir}" || exit
